@@ -1,0 +1,22 @@
+{% extends 'weather/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="city" placeholder="Enter city" required>
+    <button type="submit">Get Weather</button>
+</form>
+
+{% if weather %}
+<div>
+    <h2>{{ weather.city }}</h2>
+    <p>Temperature: {{ weather.temperature }}°C</p>
+    <p>Description: {{ weather.description }}</p>
+    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Weather Icon">
+    <p><strong>Clothing Recommendation:</strong> {{ weather.clothing_tip }}</p>
+    <p><strong>Energy-Saving Tip:</strong> {{ weather.energy_tip }}</p>
+</div>
+{% endif %}
+{% endblock %}
